@@ -2,25 +2,44 @@ import { Component, h } from "@stencil/core";
 
 @Component({
   tag: "app-root",
-  styleUrl: "app-root.css",
-  shadow: true
+  styleUrl: "todomvc-app-css/index.css"
 })
 export class AppRoot {
   render() {
     return (
       <div>
-        <header>
-          <h1>Stencil App Starter</h1>
-        </header>
+        <section class="todoapp">
+          <header class="header">
+            <h1>todos</h1>
+            <input
+              class="new-todo"
+              placeholder="What needs to be done?"
+              autoFocus
+            />
+          </header>
 
-        <main>
-          <stencil-router>
-            <stencil-route-switch scrollTopOffset={0}>
-              <stencil-route url="/" component="app-home" exact={true} />
-              <stencil-route url="/profile/:name" component="app-profile" />
-            </stencil-route-switch>
-          </stencil-router>
-        </main>
+          <main>
+            <stencil-router>
+              <stencil-route-switch scrollTopOffset={0}>
+                <stencil-route url="/" component="app-home" exact={true} />
+                <stencil-route url="/profile/:name" component="app-profile" />
+              </stencil-route-switch>
+            </stencil-router>
+          </main>
+        </section>
+
+        <footer class="info">
+          <p>Double-click to edit a todo</p>
+          <p>
+            Template by <a href="http://sindresorhus.com">Sindre Sorhus</a>
+          </p>
+          <p>
+            Created by <a href="http://todomvc.com">you</a>
+          </p>
+          <p>
+            Part of <a href="http://todomvc.com">TodoMVC</a>
+          </p>
+        </footer>
       </div>
     );
   }
