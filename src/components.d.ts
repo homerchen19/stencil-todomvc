@@ -15,6 +15,7 @@ export namespace Components {
   interface TodoInput {
     'addTodo': (title: string) => {};
   }
+  interface TodoList {}
 }
 
 declare global {
@@ -37,10 +38,17 @@ declare global {
     prototype: HTMLTodoInputElement;
     new (): HTMLTodoInputElement;
   };
+
+  interface HTMLTodoListElement extends Components.TodoList, HTMLStencilElement {}
+  var HTMLTodoListElement: {
+    prototype: HTMLTodoListElement;
+    new (): HTMLTodoListElement;
+  };
   interface HTMLElementTagNameMap {
     'app-footer': HTMLAppFooterElement;
     'app-root': HTMLAppRootElement;
     'todo-input': HTMLTodoInputElement;
+    'todo-list': HTMLTodoListElement;
   }
 }
 
@@ -50,11 +58,13 @@ declare namespace LocalJSX {
   interface TodoInput {
     'addTodo'?: (title: string) => {};
   }
+  interface TodoList {}
 
   interface IntrinsicElements {
     'app-footer': AppFooter;
     'app-root': AppRoot;
     'todo-input': TodoInput;
+    'todo-list': TodoList;
   }
 }
 
@@ -67,6 +77,7 @@ declare module "@stencil/core" {
       'app-footer': LocalJSX.AppFooter & JSXBase.HTMLAttributes<HTMLAppFooterElement>;
       'app-root': LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
       'todo-input': LocalJSX.TodoInput & JSXBase.HTMLAttributes<HTMLTodoInputElement>;
+      'todo-list': LocalJSX.TodoList & JSXBase.HTMLAttributes<HTMLTodoListElement>;
     }
   }
 }
