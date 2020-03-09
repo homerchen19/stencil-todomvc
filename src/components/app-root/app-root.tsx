@@ -8,10 +8,35 @@ export class AppRoot {
   @State() todos: Todo[] = [];
 
   addTodo(title: string) {
-    this.todos.push({
+    this.todos.unshift({
+      id: this.todos.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
       title,
       completed: false
     });
+  }
+
+  delete(id) {
+    this.todos = this.todos.filter(todo => todo.id !== id);
+  }
+
+  edit(id, text) {
+    this.todos = this.todos.map(todo =>
+      todo.id === id ? { ...todo, text } : todo
+    );
+  }
+
+  complete(id) {
+    this.todos = this.todos.map(todo =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    );
+  }
+
+  completeAll() {
+    this.todos = this.todos.map(todo => ({ ...todo, completed: true }));
+  }
+
+  clearCompleted() {
+    this.todos = this.todos.filter(todo => todo.completed === false);
   }
 
   render() {

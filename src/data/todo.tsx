@@ -2,6 +2,7 @@ import { h } from "@stencil/core";
 import { createProviderConsumer } from "@stencil/state-tunnel";
 
 export interface Todo {
+  id: number;
   title: string;
   completed: boolean;
 }
