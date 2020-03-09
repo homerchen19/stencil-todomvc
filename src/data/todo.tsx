@@ -9,11 +9,17 @@ export interface Todo {
 
 export interface State {
   todos: Todo[];
+  editTodo: (id: number, newTitle: string) => void;
+  deleteTodo: (id: number) => void;
+  completeTodo: (id: number) => void;
 }
 
 export default createProviderConsumer<State>(
   {
-    todos: []
+    todos: [],
+    editTodo: () => {},
+    deleteTodo: () => {},
+    completeTodo: () => {}
   },
   (subscribe, child) => (
     <context-consumer subscribe={subscribe} renderer={child} />

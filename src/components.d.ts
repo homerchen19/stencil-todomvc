@@ -7,15 +7,26 @@
 
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
-
+import {
+  Todo,
+} from './data/todo';
 
 export namespace Components {
   interface AppFooter {}
   interface AppRoot {}
   interface TodoInput {
-    'addTodo': (title: string) => {};
+    'editTodo'?: boolean;
+    'newTodo'?: boolean;
+    'saveTodo': any;
+    'title': string;
   }
   interface TodoList {}
+  interface TodoListItem {
+    'completeTodo': (id: number) => void;
+    'deleteTodo': (id: number) => void;
+    'editTodo': (id: number, newTitle: string) => void;
+    'todo': Todo;
+  }
 }
 
 declare global {
@@ -44,11 +55,18 @@ declare global {
     prototype: HTMLTodoListElement;
     new (): HTMLTodoListElement;
   };
+
+  interface HTMLTodoListItemElement extends Components.TodoListItem, HTMLStencilElement {}
+  var HTMLTodoListItemElement: {
+    prototype: HTMLTodoListItemElement;
+    new (): HTMLTodoListItemElement;
+  };
   interface HTMLElementTagNameMap {
     'app-footer': HTMLAppFooterElement;
     'app-root': HTMLAppRootElement;
     'todo-input': HTMLTodoInputElement;
     'todo-list': HTMLTodoListElement;
+    'todo-list-item': HTMLTodoListItemElement;
   }
 }
 
@@ -56,15 +74,25 @@ declare namespace LocalJSX {
   interface AppFooter {}
   interface AppRoot {}
   interface TodoInput {
-    'addTodo'?: (title: string) => {};
+    'editTodo'?: boolean;
+    'newTodo'?: boolean;
+    'saveTodo'?: any;
+    'title'?: string;
   }
   interface TodoList {}
+  interface TodoListItem {
+    'completeTodo'?: (id: number) => void;
+    'deleteTodo'?: (id: number) => void;
+    'editTodo'?: (id: number, newTitle: string) => void;
+    'todo'?: Todo;
+  }
 
   interface IntrinsicElements {
     'app-footer': AppFooter;
     'app-root': AppRoot;
     'todo-input': TodoInput;
     'todo-list': TodoList;
+    'todo-list-item': TodoListItem;
   }
 }
 
@@ -78,6 +106,7 @@ declare module "@stencil/core" {
       'app-root': LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
       'todo-input': LocalJSX.TodoInput & JSXBase.HTMLAttributes<HTMLTodoInputElement>;
       'todo-list': LocalJSX.TodoList & JSXBase.HTMLAttributes<HTMLTodoListElement>;
+      'todo-list-item': LocalJSX.TodoListItem & JSXBase.HTMLAttributes<HTMLTodoListItemElement>;
     }
   }
 }

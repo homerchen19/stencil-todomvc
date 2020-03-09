@@ -16,7 +16,7 @@ export class TodoList {
   render() {
     return (
       <TodoTunnel.Consumer>
-        {({ todos }: { todos: Todo[] }) => {
+        {({ todos, deleteTodo, editTodo, completeTodo }) => {
           const filteredTodos = todos.filter(TODO_FILTERS[this.filter]);
           const completedCount = todos.reduce(
             (count, todo) => (todo.completed ? count + 1 : count),
@@ -27,7 +27,12 @@ export class TodoList {
             <section class="main">
               <ul class="todo-list">
                 {filteredTodos.map(todo => (
-                  <todo-list-item todo={todo} />
+                  <todo-list-item
+                    todo={todo}
+                    deleteTodo={deleteTodo}
+                    editTodo={editTodo}
+                    completeTodo={completeTodo}
+                  />
                 ))}
               </ul>
             </section>

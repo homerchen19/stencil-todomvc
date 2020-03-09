@@ -1,38 +1,50 @@
-import { Component, State, h, Prop } from "@stencil/core";
+import { Component, h, Prop } from "@stencil/core";
+import classnames from "classnames";
 
 @Component({
   tag: "todo-input"
 })
 export class TodoInput {
-  @State() text: string = "";
-
-  @Prop() addTodo: (title: string) => {};
+  @Prop({
+    mutable: true
+  })
+  title: string = "";
+  @Prop() editTodo?: boolean = false;
+  @Prop() newTodo?: boolean = false;
+  @Prop() saveTodo;
 
   handleKeyUp(event) {
-    this.text = event.target.value;
+    this.title = event.target.value;
 
     if (event.which === 13) {
-      this.addTodoTask();
+      this.saveTodoTask();
     }
   }
 
   handleBlur() {
-    if (this.text !== "") {
-      this.addTodoTask();
+    if (this.title !== "") {
+      this.saveTodoTask();
     }
   }
 
-  private addTodoTask() {
-    this.addTodo(this.text);
+  private saveTodoTask() {
+    this.saveTodo(this.title);
+
+    if (this.newTodo) {
+      this.title = "";
+    }
   }
 
   render() {
     return (
       <input
-        class="new-todo"
+        class={classnames({
+          edit: this.editTodo,
+          "new-todo": this.newTodo
+        })}
         type="text"
         placeholder="What needs to be done?"
-        value={this.text}
+        value={this.title}
         onKeyUp={this.handleKeyUp.bind(this)}
         onBlur={this.handleBlur.bind(this)}
       />
