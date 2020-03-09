@@ -1,8 +1,7 @@
 import { Component, h } from "@stencil/core";
 
 @Component({
-  tag: "app-root",
-  styleUrl: "todomvc-app-css/index.css"
+  tag: "app-root"
 })
 export class AppRoot {
   render() {
@@ -11,11 +10,7 @@ export class AppRoot {
         <section class="todoapp">
           <header class="header">
             <h1>todos</h1>
-            <input
-              class="new-todo"
-              placeholder="What needs to be done?"
-              autoFocus
-            />
+            <todo-input />
           </header>
 
           <main>
