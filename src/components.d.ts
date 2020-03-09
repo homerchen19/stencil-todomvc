@@ -11,7 +11,9 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface AppRoot {}
-  interface TodoInput {}
+  interface TodoInput {
+    'addTodo': (title: string) => {};
+  }
 }
 
 declare global {
@@ -37,7 +39,7 @@ declare global {
 declare namespace LocalJSX {
   interface AppRoot {}
   interface TodoInput {
-    'onAddTodo'?: (event: CustomEvent<any>) => void;
+    'addTodo'?: (title: string) => {};
   }
 
   interface IntrinsicElements {

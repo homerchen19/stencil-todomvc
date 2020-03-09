@@ -1,30 +1,29 @@
-import { Component, State, Event, EventEmitter, h } from "@stencil/core";
+import { Component, State, h, Prop } from "@stencil/core";
 
 @Component({
   tag: "todo-input"
 })
 export class TodoInput {
-  @Event() addTodo: EventEmitter;
-
   @State() text: string = "";
+
+  @Prop() addTodo: (title: string) => {};
 
   handleKeyUp(event) {
     this.text = event.target.value;
 
     if (event.which === 13) {
-      this.emitAddTodo();
+      this.addTodoTask();
     }
   }
 
   handleBlur() {
     if (this.text !== "") {
-      this.emitAddTodo();
+      this.addTodoTask();
     }
   }
 
-  private emitAddTodo() {
-    console.log(this.text);
-    this.addTodo.emit(this.text);
+  private addTodoTask() {
+    this.addTodo(this.text);
   }
 
   render() {

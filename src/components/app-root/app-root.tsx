@@ -1,16 +1,26 @@
-import { Component, h } from "@stencil/core";
+import { Component, State, h } from "@stencil/core";
+import TodoTunnel, { Todo } from "../../data/todo";
 
 @Component({
   tag: "app-root"
 })
 export class AppRoot {
+  @State() todos: Todo[] = [];
+
+  addTodo(title: string) {
+    this.todos.push({
+      title,
+      completed: false
+    });
+  }
+
   render() {
     return (
-      <div>
+      <TodoTunnel.Provider state={{ todos: this.todos }}>
         <section class="todoapp">
           <header class="header">
             <h1>todos</h1>
-            <todo-input />
+            <todo-input addTodo={this.addTodo.bind(this)} />
           </header>
 
           <main>
@@ -35,7 +45,7 @@ export class AppRoot {
             Part of <a href="http://todomvc.com">TodoMVC</a>
           </p>
         </footer>
-      </div>
+      </TodoTunnel.Provider>
     );
   }
 }
