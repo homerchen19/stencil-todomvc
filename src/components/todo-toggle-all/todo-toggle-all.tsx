@@ -1,16 +1,16 @@
 import { Component, Prop, h } from "@stencil/core";
-import { Todo } from "../../data/todo";
 
 @Component({
   tag: "todo-toggle-all"
 })
 export class TodoToggleAll {
-  @Prop() todos: Todo[];
+  @Prop() todoCount: number;
+  @Prop() completedTodoCount: number;
   @Prop() completeAll: () => void;
   @Prop() incompleteAll: () => void;
 
-  handleClick(completedCount) {
-    if (completedCount === this.todos.length) {
+  handleClick() {
+    if (this.completedTodoCount === this.todoCount) {
       this.incompleteAll();
     } else {
       this.completeAll();
@@ -18,22 +18,14 @@ export class TodoToggleAll {
   }
 
   render() {
-    const completedCount = this.todos.reduce(
-      (count, todo) => (todo.completed ? count + 1 : count),
-      0
-    );
-
-    return this.todos.length > 0 ? (
+    return this.todoCount > 0 ? (
       <div>
         <input
           class="toggle-all"
           type="checkbox"
-          checked={completedCount === this.todos.length}
+          checked={this.completedTodoCount === this.todoCount}
         />
-        <label
-          htmlFor="toggle-all"
-          onClick={this.handleClick.bind(this, completedCount)}
-        >
+        <label htmlFor="toggle-all" onClick={this.handleClick.bind(this)}>
           Mark all as complete
         </label>
       </div>
