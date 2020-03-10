@@ -22,7 +22,7 @@ export class TodoInput {
   }
 
   handleBlur() {
-    if (this.title !== "") {
+    if (this.title !== "" && this.editTodo) {
       this.saveTodoTask();
     }
   }
@@ -42,8 +42,8 @@ export class TodoInput {
           edit: this.editTodo,
           "new-todo": this.newTodo
         })}
-        type="text"
         placeholder="What needs to be done?"
+        type="text"
         value={this.title}
         onKeyUp={this.handleKeyUp.bind(this)}
         onBlur={this.handleBlur.bind(this)}

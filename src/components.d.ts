@@ -27,6 +27,11 @@ export namespace Components {
     'editTodo': (id: number, newTitle: string) => void;
     'todo': Todo;
   }
+  interface TodoToggleAll {
+    'completeAll': () => void;
+    'incompleteAll': () => void;
+    'todos': Todo[];
+  }
 }
 
 declare global {
@@ -61,12 +66,19 @@ declare global {
     prototype: HTMLTodoListItemElement;
     new (): HTMLTodoListItemElement;
   };
+
+  interface HTMLTodoToggleAllElement extends Components.TodoToggleAll, HTMLStencilElement {}
+  var HTMLTodoToggleAllElement: {
+    prototype: HTMLTodoToggleAllElement;
+    new (): HTMLTodoToggleAllElement;
+  };
   interface HTMLElementTagNameMap {
     'app-footer': HTMLAppFooterElement;
     'app-root': HTMLAppRootElement;
     'todo-input': HTMLTodoInputElement;
     'todo-list': HTMLTodoListElement;
     'todo-list-item': HTMLTodoListItemElement;
+    'todo-toggle-all': HTMLTodoToggleAllElement;
   }
 }
 
@@ -86,6 +98,11 @@ declare namespace LocalJSX {
     'editTodo'?: (id: number, newTitle: string) => void;
     'todo'?: Todo;
   }
+  interface TodoToggleAll {
+    'completeAll'?: () => void;
+    'incompleteAll'?: () => void;
+    'todos'?: Todo[];
+  }
 
   interface IntrinsicElements {
     'app-footer': AppFooter;
@@ -93,6 +110,7 @@ declare namespace LocalJSX {
     'todo-input': TodoInput;
     'todo-list': TodoList;
     'todo-list-item': TodoListItem;
+    'todo-toggle-all': TodoToggleAll;
   }
 }
 
@@ -107,6 +125,7 @@ declare module "@stencil/core" {
       'todo-input': LocalJSX.TodoInput & JSXBase.HTMLAttributes<HTMLTodoInputElement>;
       'todo-list': LocalJSX.TodoList & JSXBase.HTMLAttributes<HTMLTodoListElement>;
       'todo-list-item': LocalJSX.TodoListItem & JSXBase.HTMLAttributes<HTMLTodoListItemElement>;
+      'todo-toggle-all': LocalJSX.TodoToggleAll & JSXBase.HTMLAttributes<HTMLTodoToggleAllElement>;
     }
   }
 }

@@ -39,6 +39,10 @@ export class AppRoot {
     this.todos = this.todos.map(todo => ({ ...todo, completed: true }));
   }
 
+  incompleteAll() {
+    this.todos = this.todos.map(todo => ({ ...todo, completed: false }));
+  }
+
   clearCompleted() {
     this.todos = this.todos.filter(todo => todo.completed === false);
   }
@@ -50,7 +54,9 @@ export class AppRoot {
           todos: this.todos,
           editTodo: this.edit.bind(this),
           deleteTodo: this.delete.bind(this),
-          completeTodo: this.complete.bind(this)
+          completeTodo: this.complete.bind(this),
+          completeAllTodo: this.completeAll.bind(this),
+          incompleteAllTodo: this.incompleteAll.bind(this)
         }}
       >
         <section class="todoapp">

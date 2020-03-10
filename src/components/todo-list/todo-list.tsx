@@ -16,15 +16,23 @@ export class TodoList {
   render() {
     return (
       <TodoTunnel.Consumer>
-        {({ todos, deleteTodo, editTodo, completeTodo }) => {
+        {({
+          todos,
+          deleteTodo,
+          editTodo,
+          completeTodo,
+          completeAllTodo,
+          incompleteAllTodo
+        }) => {
           const filteredTodos = todos.filter(TODO_FILTERS[this.filter]);
-          const completedCount = todos.reduce(
-            (count, todo) => (todo.completed ? count + 1 : count),
-            0
-          );
 
           return (
             <section class="main">
+              <todo-toggle-all
+                todos={todos}
+                completeAll={completeAllTodo}
+                incompleteAll={incompleteAllTodo}
+              />
               <ul class="todo-list">
                 {filteredTodos.map(todo => (
                   <todo-list-item
