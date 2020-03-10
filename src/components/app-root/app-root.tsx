@@ -56,7 +56,8 @@ export class AppRoot {
           deleteTodo: this.delete.bind(this),
           completeTodo: this.complete.bind(this),
           completeAllTodo: this.completeAll.bind(this),
-          incompleteAllTodo: this.incompleteAll.bind(this)
+          incompleteAllTodo: this.incompleteAll.bind(this),
+          clearCompletedTodo: this.clearCompleted.bind(this)
         }}
       >
         <section class="todoapp">

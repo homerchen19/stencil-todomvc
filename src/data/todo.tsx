@@ -14,6 +14,7 @@ export interface State {
   completeTodo: (id: number) => void;
   completeAllTodo: (id: number) => void;
   incompleteAllTodo: (id: number) => void;
+  clearCompletedTodo: (id: number) => void;
 }
 
 export default createProviderConsumer<State>(
@@ -23,7 +24,8 @@ export default createProviderConsumer<State>(
     deleteTodo: () => {},
     completeTodo: () => {},
     completeAllTodo: () => {},
-    incompleteAllTodo: () => {}
+    incompleteAllTodo: () => {},
+    clearCompletedTodo: () => {}
   },
   (subscribe, child) => (
     <context-consumer subscribe={subscribe} renderer={child} />

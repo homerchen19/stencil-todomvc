@@ -1,18 +1,22 @@
 import { Component, State, h } from '@stencil/core';
 import TodoTunnel, { Todo } from '../../data/todo';
-import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../../data/filters';
+import Filter from '../../data/filters';
 
 const TODO_FILTERS = {
-  [SHOW_ALL]: () => true,
-  [SHOW_COMPLETED]: (todo: Todo) => !todo.completed,
-  [SHOW_ACTIVE]: (todo: Todo) => todo.completed
+  [Filter.SHOW_ALL]: () => true,
+  [Filter.SHOW_COMPLETED]: (todo: Todo) => !todo.completed,
+  [Filter.SHOW_ACTIVE]: (todo: Todo) => todo.completed
 };
 
 @Component({
   tag: 'todo-list'
 })
 export class TodoList {
-  @State() filter: keyof typeof TODO_FILTERS = SHOW_ALL;
+  @State() filter: Filter = Filter.SHOW_ALL;
+
+  handleUpdateFilter(filter: Filter) {
+    this.filter = filter;
+  }
 
   render() {
     return (
@@ -23,10 +27,11 @@ export class TodoList {
           editTodo,
           completeTodo,
           completeAllTodo,
-          incompleteAllTodo
+          incompleteAllTodo,
+          clearCompletedTodo
         }) => {
-          const todoCount: number = todos.length;
           const filteredTodos = todos.filter(TODO_FILTERS[this.filter]);
+          const todoCount: number = todos.length;
           const completedTodoCount = todos.reduce(
             (count, todo) => (todo.completed ? count + 1 : count),
             0
@@ -50,6 +55,15 @@ export class TodoList {
                   />
                 ))}
               </ul>
+              {todoCount !== 0 && (
+                <todo-list-footer
+                  selectedFilter={this.filter}
+                  completedTodoCount={completedTodoCount}
+                  activeTodoCount={todoCount - completedTodoCount}
+                  clearCompleted={clearCompletedTodo}
+                  updateFilter={this.handleUpdateFilter.bind(this)}
+                />
+              )}
             </section>
           );
         }}
