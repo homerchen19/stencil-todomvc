@@ -1,7 +1,7 @@
-import { Component, Prop, h } from "@stencil/core";
+import { Component, Prop, h } from '@stencil/core';
 
 @Component({
-  tag: "todo-toggle-all"
+  tag: 'todo-toggle-all'
 })
 export class TodoToggleAll {
   @Prop() todoCount: number;

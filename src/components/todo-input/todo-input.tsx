@@ -1,14 +1,14 @@
-import { Component, h, Prop } from "@stencil/core";
-import classnames from "classnames";
+import { Component, h, Prop } from '@stencil/core';
+import classnames from 'classnames';
 
 @Component({
-  tag: "todo-input"
+  tag: 'todo-input'
 })
 export class TodoInput {
   @Prop({
     mutable: true
   })
-  title: string = "";
+  title: string = '';
   @Prop() editTodo?: boolean = false;
   @Prop() newTodo?: boolean = false;
   @Prop() saveTodo;
@@ -22,7 +22,7 @@ export class TodoInput {
   }
 
   handleBlur() {
-    if (this.title !== "" && this.editTodo) {
+    if (this.title !== '' && this.editTodo) {
       this.saveTodoTask();
     }
   }
@@ -31,7 +31,7 @@ export class TodoInput {
     this.saveTodo(this.title);
 
     if (this.newTodo) {
-      this.title = "";
+      this.title = '';
     }
   }
 
@@ -40,7 +40,7 @@ export class TodoInput {
       <input
         class={classnames({
           edit: this.editTodo,
-          "new-todo": this.newTodo
+          'new-todo': this.newTodo
         })}
         placeholder="What needs to be done?"
         type="text"

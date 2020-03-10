@@ -1,6 +1,6 @@
-import { Component, State, h } from "@stencil/core";
-import TodoTunnel, { Todo } from "../../data/todo";
-import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from "../../data/filters";
+import { Component, State, h } from '@stencil/core';
+import TodoTunnel, { Todo } from '../../data/todo';
+import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../../data/filters';
 
 const TODO_FILTERS = {
   [SHOW_ALL]: () => true,
@@ -9,7 +9,7 @@ const TODO_FILTERS = {
 };
 
 @Component({
-  tag: "todo-list"
+  tag: 'todo-list'
 })
 export class TodoList {
   @State() filter: keyof typeof TODO_FILTERS = SHOW_ALL;

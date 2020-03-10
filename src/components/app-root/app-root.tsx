@@ -1,8 +1,8 @@
-import { Component, State, h } from "@stencil/core";
-import TodoTunnel, { Todo } from "../../data/todo";
+import { Component, State, h } from '@stencil/core';
+import TodoTunnel, { Todo } from '../../data/todo';
 
 @Component({
-  tag: "app-root"
+  tag: 'app-root'
 })
 export class AppRoot {
   @State() todos: Todo[] = [];

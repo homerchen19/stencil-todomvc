@@ -1,9 +1,9 @@
-import { Component, State, Prop, h } from "@stencil/core";
-import classnames from "classnames";
-import { Todo } from "../../data/todo";
+import { Component, State, Prop, h } from '@stencil/core';
+import classnames from 'classnames';
+import { Todo } from '../../data/todo';
 
 @Component({
-  tag: "todo-list-item"
+  tag: 'todo-list-item'
 })
 export class TodoListItem {
   @State() isEditing: boolean = false;

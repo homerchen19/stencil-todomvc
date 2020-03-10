@@ -1,7 +1,7 @@
-import { Component, h } from "@stencil/core";
+import { Component, h } from '@stencil/core';
 
 @Component({
-  tag: "app-footer"
+  tag: 'app-footer'
 })
 export class AppFooter {
   render() {
