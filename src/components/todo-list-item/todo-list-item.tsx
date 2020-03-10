@@ -33,7 +33,7 @@ export class TodoListItem {
       >
         {this.isEditing ? (
           <todo-input
-            title={title}
+            todoTitle={title}
             saveTodo={this.handleSaveTodo.bind(this, id)}
             editTodo
           />

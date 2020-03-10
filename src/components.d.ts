@@ -21,7 +21,7 @@ export namespace Components {
     'editTodo'?: boolean;
     'newTodo'?: boolean;
     'saveTodo': any;
-    'title': string;
+    'todoTitle': string;
   }
   interface TodoList {}
   interface TodoListFooter {
@@ -107,7 +107,7 @@ declare namespace LocalJSX {
     'editTodo'?: boolean;
     'newTodo'?: boolean;
     'saveTodo'?: any;
-    'title'?: string;
+    'todoTitle'?: string;
   }
   interface TodoList {}
   interface TodoListFooter {

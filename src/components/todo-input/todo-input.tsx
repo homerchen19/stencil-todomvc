@@ -8,13 +8,13 @@ export class TodoInput {
   @Prop({
     mutable: true
   })
-  title: string = '';
+  todoTitle: string = '';
   @Prop() editTodo?: boolean = false;
   @Prop() newTodo?: boolean = false;
   @Prop() saveTodo;
 
   handleKeyUp(event) {
-    this.title = event.target.value;
+    this.todoTitle = event.target.value;
 
     if (event.which === 13) {
       this.saveTodoTask();
@@ -22,16 +22,16 @@ export class TodoInput {
   }
 
   handleBlur() {
-    if (this.title !== '' && this.editTodo) {
+    if (this.todoTitle !== '' && this.editTodo) {
       this.saveTodoTask();
     }
   }
 
   private saveTodoTask() {
-    this.saveTodo(this.title);
+    this.saveTodo(this.todoTitle);
 
     if (this.newTodo) {
-      this.title = '';
+      this.todoTitle = '';
     }
   }
 
@@ -44,7 +44,7 @@ export class TodoInput {
         })}
         placeholder="What needs to be done?"
         type="text"
-        value={this.title}
+        value={this.todoTitle}
         onKeyUp={this.handleKeyUp.bind(this)}
         onBlur={this.handleBlur.bind(this)}
       />
