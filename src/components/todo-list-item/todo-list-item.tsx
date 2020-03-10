@@ -27,6 +27,9 @@ export class TodoListItem {
           completed,
           editing: this.isEditing
         })}
+        style={{
+          borderBottom: '1px solid #ededed'
+        }}
       >
         {this.isEditing ? (
           <todo-input

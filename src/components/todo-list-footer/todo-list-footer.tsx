@@ -1,6 +1,6 @@
 import { Component, Prop, h } from '@stencil/core';
 import classnames from 'classnames';
-import Filter from '../../data/filters';
+import { Filter } from '../../data/filters';
 
 const FILTER_TITLES = {
   [Filter.SHOW_ALL]: 'All',
@@ -17,6 +17,16 @@ export class TodoListFooter {
   @Prop() completedTodoCount: number;
   @Prop() clearCompleted: () => void;
   @Prop() updateFilter: (filter: Filter) => void;
+
+  renderTodoCount() {
+    const itemWord = this.activeTodoCount === 1 ? 'item' : 'items';
+
+    return (
+      <span class="todo-count">
+        <strong>{this.activeTodoCount || 'No'}</strong> {itemWord} left
+      </span>
+    );
+  }
 
   renderFilterLink(filter) {
     const title = FILTER_TITLES[filter];
@@ -37,13 +47,19 @@ export class TodoListFooter {
   render() {
     return (
       <footer class="footer">
+        {this.renderTodoCount()}
         <ul class="filters">
           {[Filter.SHOW_ALL, Filter.SHOW_ACTIVE, Filter.SHOW_COMPLETED].map(
             filter => (
-              <li key={filter}>{this.renderFilterLink(filter)}</li>
+              <li>{this.renderFilterLink(filter)}</li>
             )
           )}
         </ul>
+        {this.completedTodoCount > 0 && (
+          <button class="clear-completed" onClick={this.clearCompleted}>
+            Clear completed
+          </button>
+        )}
       </footer>
     );
   }

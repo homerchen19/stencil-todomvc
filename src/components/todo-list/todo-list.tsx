@@ -1,11 +1,11 @@
 import { Component, State, h } from '@stencil/core';
 import TodoTunnel, { Todo } from '../../data/todo';
-import Filter from '../../data/filters';
+import { Filter } from '../../data/filters';
 
 const TODO_FILTERS = {
   [Filter.SHOW_ALL]: () => true,
-  [Filter.SHOW_COMPLETED]: (todo: Todo) => !todo.completed,
-  [Filter.SHOW_ACTIVE]: (todo: Todo) => todo.completed
+  [Filter.SHOW_COMPLETED]: (todo: Todo) => todo.completed,
+  [Filter.SHOW_ACTIVE]: (todo: Todo) => !todo.completed
 };
 
 @Component({
